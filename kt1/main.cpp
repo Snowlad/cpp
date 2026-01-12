@@ -4,16 +4,16 @@
 
 using namespace std;
 
-int game() {
+int game(int maxnum) {
     srand(time(0));
     // luku väliltä 1–20
-    int oikea = rand() % 20 + 1;
+    int oikea = rand() % maxnum + 1;
 
     int arvaus = 0;
     int yritykset = 0;
 
     while (arvaus != oikea) {
-        cout << "Arvaa luku (1-20): ";
+        cout << "Arvaa luku (1-" << maxnum << "): ";
         cin >> arvaus;
         yritykset++;
         if (arvaus < oikea) {
@@ -30,7 +30,7 @@ int game() {
 
 
 int main() {
-    int tulos = game();
+    int tulos = game(40);
     cout << "Arvasit oikein " << tulos << " kerralla!" << endl;
     return 0;
 }
