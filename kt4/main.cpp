@@ -16,34 +16,34 @@ public:
     virtual bool deposit(double maara) {
         if (maara < 0) return false; // Ei negatiivistä
         saldo += maara;
-        return true; //
+        return true;
     }
 
     virtual bool withdraw(double maara) {
         if (maara < 0 || maara > saldo) return false; // Ei liikaa nostoa
         saldo -= maara;
-        return true; //
+        return true;
     }
 };
 
 class Luottotili : public Pankkitili {
 protected:
-    double luottoRaja = 0; //
+    double luottoRaja = 0;
 
 public:
 
     Luottotili(string nimi, double raja) : Pankkitili(nimi), luottoRaja(raja) {}
 
     bool withdraw(double maara) override {
-        if (maara < 0 || (saldo - maara) < -luottoRaja) return false; //
+        if (maara < 0 || (saldo - maara) < -luottoRaja) return false;
         saldo -= maara;
-        return true; //
+        return true;
     }
 
     bool deposit(double maara) override {
         if (maara < 0 || (saldo + maara) > 0) return false; //
         saldo += maara;
-        return true; //
+        return true;
     }
 };
 
@@ -58,12 +58,12 @@ public:
     Asiakas(string nimi, double luottoRaja)
         : nimi(nimi), kayttotili(nimi), luottotili(nimi, luottoRaja) {}
 
-    string getNimi() { return nimi; } //
+    string getNimi() { return nimi; }
 
     void showSaldo() {
         cout << "\n Asiakkaan " << nimi << " tilitiedot:" << endl;
-        cout << " Kayttotilin saldo: " << kayttotili.getBalance() << endl; //
-        cout << " Luottotilin saldo: " << luottotili.getBalance() << endl; //
+        cout << " Kayttotilin saldo: " << kayttotili.getBalance() << endl;
+        cout << " Luottotilin saldo: " << luottotili.getBalance() << endl;
     }
 
     bool talletus(double maara) { return kayttotili.deposit(maara); }
